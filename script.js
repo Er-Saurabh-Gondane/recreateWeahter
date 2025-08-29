@@ -8,7 +8,7 @@ const userInfoContainer = document.querySelector(".user-info-container");
 const searchForm = document.querySelector("[ data-serachForm]");
 const loadingScreen = document.querySelector(".loading-container");
 
-const API_KEY = "4ab72ee54d6b4bb1af477985f45df71b";
+const API_KEY = "Your Api Key";
 
 grantAcsBtn.addEventListener("click", getLocation);
 function getLocation() {
