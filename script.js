@@ -59,6 +59,7 @@ function switchTab(clickedTab) {
       userInfoContainer.classList.add("active");
       // here our best part start means the we are not on the search tab but if we want to show user weather info we need to check in the sesstion storage if the lon and lat is present or not
       getFromSessionStorage();
+      userInfoContainer.classList.remove('active');
     }
   }
 }
@@ -117,11 +118,11 @@ function renderWeatherInfo(data) {
   countryFlag.src = `https://flagcdn.com/144x108/${data?.sys?.country.toLowerCase()}.png`;
   weatherDesc.innerText = `${data?.weather[0]?.description}`; //or weather?.[0]?.description
   weatherIcon.src = `https://openweathermap.org/img/w/${data?.weather[0]?.icon}.png`;
-  dataTemp.innerText = `${data?.main?.temp}`;
+  dataTemp.innerText = `${data?.main?.temp} °C`;
 
-  windSpeed.innerText = `${data?.wind?.speed}`;
-  humidityData.innerText = `${data?.main?.humidity}`;
-  cloudData.innerText = `${data?.clouds?.all}`;
+  windSpeed.innerText = `${data?.wind?.speed} m/s`;
+  humidityData.innerText = `${data?.main?.humidity} %`;
+  cloudData.innerText = `${data?.clouds?.all} %`;
 }
 const serachInput = document.querySelector("[data-searchInput]");
 searchForm.addEventListener("submit", (e) => {
@@ -129,6 +130,7 @@ searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
   let cityName = serachInput.value.trim();
   if (serachInput == "") {
+      showError("❌ City not found, please try again");
     return;
   } else {
     fetchSearchWeatherinfo(cityName);
